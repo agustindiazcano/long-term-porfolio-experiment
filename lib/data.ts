@@ -6,7 +6,7 @@ export type Row = { date: string } & Record<string, number | string>;
 
 const totalWeight = holdings.reduce((a, h) => a + h.weight, 0);
 
-// PRNG determinista para que la serie ilustrativa sea estable entre builds.
+// Deterministic PRNG so the illustrative series is stable across builds.
 function mulberry32(seed: number) {
   return () => {
     seed |= 0;
@@ -33,7 +33,7 @@ function monthsBetween(start: string, end: Date): string[] {
   return out;
 }
 
-/** Serie mensual en base 100 por activo + el portfolio (buy & hold, sin rebalanceo). */
+/** Monthly base-100 series per asset + the portfolio (buy & hold, no rebalancing). */
 export function buildSeries(): Row[] {
   const dates = monthsBetween(START_DATE, new Date());
   const levels = holdings.map(() => 100);
@@ -55,7 +55,7 @@ export function buildSeries(): Row[] {
   });
 }
 
-/** Composicion actual: el peso inicial arrastrado por la performance de cada posicion. */
+/** Current composition: the initial weight carried forward by each position's performance. */
 export function currentComposition(series: Row[]) {
   const last = series[series.length - 1];
   const values = holdings.map((h) => ({

@@ -1,42 +1,45 @@
 # AGENTS.md
 
-Guía para agentes (Claude Code u otros) que trabajen en este repo.
+Guide for agents (Claude Code or others) working in this repo.
 
-## Proyecto
+## Project
 
-Front estático (Next.js + TypeScript, `output: "export"`) que visualiza un experimento de portfolio buy & hold iniciado en marzo de 2016. Se despliega en GitHub Pages. Licencia MIT.
+Static front end (Next.js + TypeScript, `output: "export"`) that visualizes a buy & hold portfolio experiment started in March 2016. Deployed to GitHub Pages. MIT license.
 
-## Estructura
+## Language
 
-- `app/` — layout, página y estilos globales.
-- `components/` — `Dashboard` (gráfico histórico + torta, client component) y `Footer`.
-- `data/holdings.ts` — posiciones del portfolio (hoy datos de ejemplo).
-- `lib/` — generación de series y composición, colores.
-- `.github/workflows/deploy.yml` — build y deploy a Pages en cada push a `main`.
+**The project language is English.** All UI text, documentation, code comments, commit messages and metadata must be written in English. (The owner may chat in Spanish; that does not change the project language.)
 
-## Flujo de trabajo
+## Structure
 
-- **Commit al terminar cada tarea**, con mensaje claro y breve.
-- **Nunca hacer push sin preguntar** al dueño del repo cuándo quiere hacerlo.
-- Los pushes van directo a `main` (proyecto chico, no hace falta PR).
-- Antes de commitear: `npm run typecheck` y `npm run build` deben pasar.
+- `app/` — layout, page, sitemap and global styles.
+- `components/` — `Dashboard` (historical chart + pie, client component), `Footer`, `ThemeToggle`.
+- `data/holdings.ts` — portfolio positions and account figures.
+- `lib/` — series/composition generation, colors, site constants.
+- `public/` — `robots.txt` and `llms.txt`.
+- `.github/workflows/deploy.yml` — build and deploy to Pages on every push to `main`.
 
-## Documentación para LLMs
+## Workflow
 
-- Siempre que se actualice el `README.md` o el proyecto (datos, secciones, stack, URLs), **evaluar si hay que actualizar `public/llms.txt`** y hacerlo en el mismo commit.
-- `public/robots.txt` lleva la lista de user-agents provista por el dueño; no recortarla sin preguntar.
+- **Commit when each task is done**, with a clear, short message.
+- **Never push without asking** the repo owner when they want to push (unless they explicitly say to push).
+- Pushes go straight to `main` (small project, no PRs needed).
+- Before committing: `npm run typecheck` and `npm run build` must pass.
 
-## Fuente de los datos
+## Documentation for LLMs
 
-- El portfolio es público (La Bolsa Virtual, perfil marcelogallardiola, transacciones de 2016 sin modificaciones). Mantener esa mención en el sitio, el README y `llms.txt`.
-- Los datos de `data/holdings.ts` (pesos y serie) son ilustrativos hasta cargar los reales; no presentarlos como reales.
+- Whenever the `README.md` or the project changes (data, sections, stack, URLs), **check whether `public/llms.txt` needs updating** and do it in the same commit.
+- `public/robots.txt` holds the user-agent list provided by the owner; do not trim it without asking.
 
-## Convenciones
+## Data source
 
-- Tema oscuro por defecto con toggle claro/oscuro (`data-theme`); usar variables CSS, no colores fijos.
-- Mantener SEO: metadata en `app/layout.tsx`, `app/sitemap.ts`, JSON-LD.
+- The portfolio is public (La Bolsa Virtual, profile marcelogallardiola, 2016 transactions unmodified). Keep that mention on the site, in the README and in `llms.txt`.
+- The data in `data/holdings.ts` (weights and series) is illustrative until the real data is loaded; do not present it as real.
 
-- Idioma de la UI y docs: español.
-- El footer debe seguir diciendo "© Agustín Díaz-Cano 2026" y la última actualización (mes y año) vía `NEXT_PUBLIC_LAST_UPDATE`, definida en `next.config.ts`.
-- Mantener compatibilidad con export estático (sin APIs de servidor ni `next/image` optimizado).
-- No agregar dependencias sin necesidad.
+## Conventions
+
+- Dark theme by default with a light/dark toggle (`data-theme`); use CSS variables, not hard-coded colors.
+- Keep SEO in place: metadata in `app/layout.tsx`, `app/sitemap.ts`, JSON-LD.
+- The footer must keep saying "© Agustín Díaz-Cano 2026" plus the last update (month and year) via `NEXT_PUBLIC_LAST_UPDATE`, defined in `next.config.ts`.
+- Keep static-export compatibility (no server APIs, no optimized `next/image`).
+- Do not add dependencies unless necessary.

@@ -35,9 +35,9 @@ export default function Dashboard({ series, composition }: Props) {
   return (
     <>
       <section className="card">
-        <h2>Evolución histórica (base 100 = marzo 2016)</h2>
+        <h2>Historical performance (base 100 = March 2016)</h2>
         <div className="chips">
-          <span className="chip fixed">Portfolio total</span>
+          <span className="chip fixed">Total portfolio</span>
           {holdings.map((h) => (
             <button
               key={h.ticker}
@@ -83,7 +83,7 @@ export default function Dashboard({ series, composition }: Props) {
       </section>
 
       <section className="card">
-        <h2>Composición actual del portfolio</h2>
+        <h2>Current portfolio composition</h2>
         <div className="chart pie">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>

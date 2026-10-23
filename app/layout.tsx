@@ -10,11 +10,11 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    "portfolio largo plazo",
+    "long-term portfolio",
     "buy and hold",
-    "análisis fundamental",
-    "análisis macroeconómico",
-    "experimento de inversión",
+    "fundamental analysis",
+    "macroeconomic analysis",
+    "investment experiment",
     "paper trading",
     "Tesla",
     "La Bolsa Virtual",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} | ${AUTHOR}`,
     description: SITE_DESCRIPTION,
-    locale: "es_AR",
+    locale: "en_GB",
   },
   twitter: {
     card: "summary",
@@ -51,18 +51,18 @@ const jsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
-  inLanguage: "es",
+  inLanguage: "en",
   author: { "@type": "Person", name: AUTHOR },
   license: "https://opensource.org/licenses/MIT",
   isBasedOn: SOURCE_URL,
 };
 
-// Aplica el tema guardado antes del primer paint (oscuro por defecto).
+// Applies the saved theme before first paint (dark by default).
 const themeScript = `try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script

@@ -18,7 +18,7 @@ export default function ThemeToggle() {
     try {
       localStorage.setItem("theme", next);
     } catch {
-      // localStorage no disponible: el tema solo dura la sesion.
+      // localStorage unavailable: the theme only lasts for the session.
     }
   };
 
@@ -27,9 +27,9 @@ export default function ThemeToggle() {
       type="button"
       className="theme-toggle"
       onClick={toggle}
-      aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+      aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {theme === "dark" ? "☀️ Claro" : "🌙 Oscuro"}
+      {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
     </button>
   );
 }

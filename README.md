@@ -1,64 +1,59 @@
-# Experimento de portfolio a largo plazo
+# Long-Term Portfolio Experiment
 
-Front de visualización de datos de un experimento de inversión **buy & hold** de largo plazo, iniciado en **marzo de 2016** con £100.000 de capital simulado. Las posiciones se compraron con criterio de **análisis fundamental, macroeconómico** y otros factores, y se dejaron correr más de una década sin operar activamente.
+Data visualization front end for a long-term **buy & hold** investment experiment started in **March 2016** with £100,000 of simulated capital. Positions were bought using **fundamental and macroeconomic analysis**, among other factors, and left untouched for over a decade without active trading.
 
-🌐 Sitio: https://agustindiazcano.github.io/long-term-porfolio-experiment/
+🌐 Site: https://agustindiazcano.github.io/long-term-porfolio-experiment/
 
-## Fuente de los datos
+## Data source
 
-El portfolio analizado es **público** y está en [La Bolsa Virtual (perfil marcelogallardiola)](https://www.labolsavirtual.com/marcelogallardiola), con todas las transacciones de evidencia de 2016, **sin modificaciones**. Este proyecto solo lo visualiza.
+The analyzed portfolio is **public** and available on [La Bolsa Virtual (profile marcelogallardiola)](https://www.labolsavirtual.com/marcelogallardiola), with all the 2016 evidence transactions, **unmodified**. This project only visualizes it.
 
-Posiciones: Oro, Petróleo Crudo, JP Morgan Chase, Facebook (Meta), Alibaba, First Solar, Tesla Motors, Google (Alphabet), Starbucks, Plata, Amazon.com, Apple, NortonLifeLock (Symantec), Vertex Pharmaceuticals y Gas natural.
+Positions: Gold, Crude Oil, JP Morgan Chase, Facebook (Meta), Alibaba, First Solar, Tesla Motors, Google (Alphabet), Starbucks, Silver, Amazon.com, Apple, NortonLifeLock (Symantec), Vertex Pharmaceuticals and Natural Gas.
 
-## El caso Tesla
+## The Tesla case
 
-La posición en Tesla se tomó cuando el interés vendedor (short interest) marcaba un récord histórico y el consenso del mercado apostaba en contra de la compañía. Según el contexto del proyecto, su capitalización pasó de ~US$34.000 M (2016) a ~US$1,48 billones hoy (~43x).
+The Tesla position was taken when short interest hit an all-time record and market consensus was betting against the company. According to the project context, its market cap has grown from ~US$34 billion (2016) to ~US$1.48 trillion today (~43x).
 
-## Qué muestra
+## What it shows
 
-- Explicación del experimento y fuente de los datos.
-- Indicadores de rendimiento de la cuenta (capital inicial, valoración, capital invertido, comisiones, etc.).
-- Gráfico histórico del portfolio completo (base 100 = marzo 2016), con selección de cada activo para superponerlo.
-- Gráfico de torta con la composición del portfolio.
-- Modo oscuro (por defecto) y claro.
-- Footer con autor y fecha (mes y año) de la última actualización, recalculada en cada deploy.
+- Explanation of the experiment and the data source.
+- Account performance indicators (initial capital, account value, invested capital, commissions, etc.).
+- Historical chart of the whole portfolio (base 100 = March 2016), with the option to select each asset and overlay it.
+- Pie chart of the portfolio composition.
+- Dark (default) and light mode.
+- Footer with the author and the month and year of the last update, recomputed on every deploy.
 
-> ⚠️ Las cifras de la cuenta son las del portfolio público, pero los **gráficos usan datos ilustrativos** (pesos iniciales y evolución por activo) hasta cargar las transacciones reales. Se reemplazan editando `data/holdings.ts` y `lib/data.ts`.
+> ⚠️ The account figures come from the public portfolio, but the **charts use illustrative data** (initial weights and per-asset performance) until the real transactions are loaded. Replace them by editing `data/holdings.ts` and `lib/data.ts`.
 
-## SEO y LLMs
+## SEO and LLMs
 
-- Metadata, Open Graph, Twitter Card, JSON-LD, canonical y `sitemap.xml`.
-- `public/robots.txt` permite explícitamente crawlers de buscadores y de IA.
-- `public/llms.txt` explica el proyecto para LLMs. **Se actualiza cuando cambia el README o el proyecto** (ver `AGENTS.md`).
+- Metadata, Open Graph, Twitter Card, JSON-LD, canonical and `sitemap.xml`.
+- `public/robots.txt` explicitly allows search and AI crawlers.
+- `public/llms.txt` explains the project to LLMs. **It is updated whenever the README or the project changes** (see `AGENTS.md`).
 
 ## Stack
 
-Next.js (App Router, export estático) · TypeScript · Recharts
+Next.js (App Router, static export) · TypeScript · Recharts
 
-## Desarrollo
+## Development
 
 ```bash
 npm install
 npm run dev        # http://localhost:3000
 npm run typecheck
-npm run build      # genera ./out
+npm run build      # outputs ./out
 ```
 
-## Deploy en GitHub Pages
+## Deploying to GitHub Pages
 
-El workflow `.github/workflows/deploy.yml` compila y publica en cada push a `main`. Pasos únicos en el repo:
+The `.github/workflows/deploy.yml` workflow builds and publishes on every push to `main` (Pages source set to GitHub Actions). The `basePath` is taken from the repo name (`NEXT_PUBLIC_BASE_PATH`). Since every push triggers a build, the footer's "Last update" reflects the month and year of the last push.
 
-1. `Settings → Pages → Build and deployment → Source: GitHub Actions`.
-2. Hacer push a `main`.
-
-El `basePath` se toma del nombre del repo (`NEXT_PUBLIC_BASE_PATH`). Como cada push dispara un build, el "Última actualización" del footer refleja el mes y año del último push.
-
-> Nota: los crawlers solo leen `robots.txt` en la raíz del dominio; en una project page (`usuario.github.io/repo/`) esa raíz no es controlable. Con dominio propio funciona tal cual.
+> Note: crawlers only read `robots.txt` at the domain root; on a project page (`user.github.io/repo/`) that root is not under your control. With a custom domain it works as is.
 
 ## Disclaimer
 
-Proyecto personal y educativo. No es una recomendación de inversión.
+Personal, educational project. Not investment advice.
 
-## Licencia
+## License
 
 [MIT](LICENSE) © 2026 Agustín Díaz-Cano
