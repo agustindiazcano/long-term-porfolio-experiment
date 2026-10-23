@@ -15,7 +15,7 @@ import {
   YAxis,
 } from "recharts";
 import { holdings } from "@/data/holdings";
-import { PALETTE, PORTFOLIO_COLOR } from "@/lib/colors";
+import { PALETTE } from "@/lib/colors";
 import { PORTFOLIO_KEY, type Row } from "@/lib/data";
 
 interface Props {
@@ -54,16 +54,16 @@ export default function Dashboard({ series, composition }: Props) {
         <div className="chart">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={series} margin={{ top: 8, right: 16, bottom: 0, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--grid)" />
               <XAxis dataKey="date" minTickGap={48} tick={{ fontSize: 12 }} />
               <YAxis tick={{ fontSize: 12 }} width={44} />
-              <Tooltip />
+              <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", color: "var(--fg)" }} />
               <Legend />
               <Line
                 type="monotone"
                 dataKey={PORTFOLIO_KEY}
                 name="Portfolio"
-                stroke={PORTFOLIO_COLOR}
+                stroke="var(--fg)"
                 strokeWidth={3}
                 dot={false}
               />
@@ -95,12 +95,13 @@ export default function Dashboard({ series, composition }: Props) {
                 outerRadius="80%"
                 paddingAngle={1}
                 label={({ ticker, pct }) => `${ticker} ${pct.toFixed(1)}%`}
+                labelLine={false}
               >
                 {composition.map((c) => (
                   <Cell key={c.ticker} fill={colorOf(c.ticker)} />
                 ))}
               </Pie>
-              <Tooltip formatter={(v: number) => `${v.toFixed(1)}%`} />
+              <Tooltip formatter={(v: number) => `${v.toFixed(1)}%`} contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", color: "var(--fg)" }} />
             </PieChart>
           </ResponsiveContainer>
         </div>

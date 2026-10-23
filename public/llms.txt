@@ -1,0 +1,48 @@
+# Experimento de portfolio a largo plazo
+
+> Visualización web de un experimento de inversión buy & hold de largo plazo iniciado en marzo de 2016 con £100.000 de capital simulado (paper trading), construido con análisis fundamental y macroeconómico. Sitio creado por Agustín Díaz-Cano. Licencia MIT.
+
+## Qué es
+
+Es un experimento de largo plazo (hold): las posiciones se compraron en marzo de 2016 con criterio de análisis fundamental, contexto macroeconómico y otros factores, y se dejaron correr durante más de una década sin operar activamente. El objetivo es observar cómo evoluciona una cartera construida con convicción, sin reaccionar al ruido del corto plazo. No usa técnicas de trading sistemático tipo Turtle: es solo análisis fundamental y macro.
+
+## Fuente de los datos
+
+El portfolio analizado es público y está en La Bolsa Virtual (perfil marcelogallardiola): https://www.labolsavirtual.com/marcelogallardiola
+Contiene todas las transacciones de evidencia de 2016, sin modificaciones. Este sitio solo lo visualiza; no es el autor del portfolio original ni lo modifica.
+
+## Posiciones
+
+Oro, Petróleo Crudo, JP Morgan Chase, Facebook (Meta), Alibaba, First Solar, Tesla Motors, Google (Alphabet), Starbucks, Plata, Amazon.com, Apple, NortonLifeLock (Symantec), Vertex Pharmaceuticals, Gas natural (commodity).
+
+## Estado de la cuenta (octubre de 2026, en libras £)
+
+- Capital inicial: £100.000,00
+- Valoración de la cuenta: £603.875,93 (aprox. 6x, ~18-19% anualizado)
+- Capital invertido: £555.144,32
+- Capital disponible: £42.363,51
+- Saldo: £48.731,61
+- Garantía usada: £6.368,09
+- Comisiones pagadas: £422,18
+
+## El caso Tesla
+
+La posición en Tesla se tomó cuando el interés vendedor (short interest) en la acción marcaba un récord histórico y el consenso del mercado apostaba en contra de la compañía. Según el contexto del proyecto, su capitalización bursátil pasó de ~US$34.000 millones en 2016 a ~US$1,48 billones hoy (aprox. 43 veces).
+
+## Qué muestra el sitio
+
+- Explicación del experimento y fuente de los datos.
+- Indicadores de rendimiento de la cuenta.
+- Gráfico histórico del portfolio completo (base 100 = marzo 2016) con selección de cada activo para superponerlo.
+- Gráfico de torta con la composición del portfolio.
+- Modo oscuro (por defecto) y claro.
+
+## Limitaciones
+
+Los gráficos de evolución por activo y los pesos de composición son datos ilustrativos hasta cargar las transacciones reales; las cifras de la cuenta sí corresponden al portfolio público. Proyecto educativo: no es una recomendación de inversión.
+
+## Enlaces
+
+- Sitio: https://agustindiazcano.github.io/long-term-porfolio-experiment/
+- Código (MIT): https://github.com/agustindiazcano/long-term-porfolio-experiment
+- Fuente del portfolio: https://www.labolsavirtual.com/marcelogallardiola

@@ -4,7 +4,9 @@ export const PORTFOLIO_KEY = "PORTFOLIO";
 
 export type Row = { date: string } & Record<string, number | string>;
 
-// PRNG determinista para que la serie de ejemplo sea estable entre builds.
+const totalWeight = holdings.reduce((a, h) => a + h.weight, 0);
+
+// PRNG determinista para que la serie ilustrativa sea estable entre builds.
 function mulberry32(seed: number) {
   return () => {
     seed |= 0;
@@ -31,7 +33,7 @@ function monthsBetween(start: string, end: Date): string[] {
   return out;
 }
 
-/** Serie mensual en base 100 por accion + el portfolio (buy & hold, sin rebalanceo). */
+/** Serie mensual en base 100 por activo + el portfolio (buy & hold, sin rebalanceo). */
 export function buildSeries(): Row[] {
   const dates = monthsBetween(START_DATE, new Date());
   const levels = holdings.map(() => 100);
@@ -47,7 +49,7 @@ export function buildSeries(): Row[] {
       row[h.ticker] = Number(levels[i].toFixed(2));
     });
     row[PORTFOLIO_KEY] = Number(
-      holdings.reduce((acc, h, i) => acc + h.weight * levels[i], 0).toFixed(2),
+      holdings.reduce((acc, h, i) => acc + (h.weight / totalWeight) * levels[i], 0).toFixed(2),
     );
     return row;
   });
@@ -60,7 +62,7 @@ export function currentComposition(series: Row[]) {
     ticker: h.ticker,
     name: h.name,
     sector: h.sector,
-    value: h.weight * (last[h.ticker] as number),
+    value: (h.weight / totalWeight) * (last[h.ticker] as number),
   }));
   const total = values.reduce((a, v) => a + v.value, 0);
   return values.map((v) => ({ ...v, pct: (v.value / total) * 100 }));

@@ -21,7 +21,20 @@ Front estático (Next.js + TypeScript, `output: "export"`) que visualiza un expe
 - Los pushes van directo a `main` (proyecto chico, no hace falta PR).
 - Antes de commitear: `npm run typecheck` y `npm run build` deben pasar.
 
+## Documentación para LLMs
+
+- Siempre que se actualice el `README.md` o el proyecto (datos, secciones, stack, URLs), **evaluar si hay que actualizar `public/llms.txt`** y hacerlo en el mismo commit.
+- `public/robots.txt` lleva la lista de user-agents provista por el dueño; no recortarla sin preguntar.
+
+## Fuente de los datos
+
+- El portfolio es público (La Bolsa Virtual, perfil marcelogallardiola, transacciones de 2016 sin modificaciones). Mantener esa mención en el sitio, el README y `llms.txt`.
+- Los datos de `data/holdings.ts` (pesos y serie) son ilustrativos hasta cargar los reales; no presentarlos como reales.
+
 ## Convenciones
+
+- Tema oscuro por defecto con toggle claro/oscuro (`data-theme`); usar variables CSS, no colores fijos.
+- Mantener SEO: metadata en `app/layout.tsx`, `app/sitemap.ts`, JSON-LD.
 
 - Idioma de la UI y docs: español.
 - El footer debe seguir diciendo "© Agustín Díaz-Cano 2026" y la última actualización (mes y año) vía `NEXT_PUBLIC_LAST_UPDATE`, definida en `next.config.ts`.
