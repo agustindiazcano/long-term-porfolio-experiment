@@ -28,6 +28,7 @@ The Tesla position was taken when short interest hit an all-time record and mark
 The portfolio is rebuilt from the 64 public transactions (22 Feb – 7 Apr 2016) in `data/transactions.json`, with daily prices and FX from Yahoo Finance. `scripts/update-data.mjs` computes the portfolio value in USD (stock splits applied, CFDs marked to market, GBP/USD of each date) and writes `data/generated/portfolio.json`, which the site reads at build time.
 
 - **Daily refresh:** a GitHub Actions cron job runs the script, commits the result and redeploys the site (`npm run update-data` does the same locally).
+- **Fallback:** if Yahoo Finance is unreachable or returns inconsistent data (more than 10% away from the reported value), the script keeps the committed snapshot in `data/generated/portfolio.json` and the build continues with it.
 - **Validation:** the modelled value is within about 1% of the value reported by the platform, and per-asset profits match the reported ones.
 - **GBP to USD:** the initial £100,000 is converted at the GBP/USD rate of February 2016; current values at today's rate.
 - **Caveat:** the platform did not apply the 2022 Alphabet split to the Google position (35 shares); it is reproduced as reported.

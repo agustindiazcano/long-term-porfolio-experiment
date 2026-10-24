@@ -39,7 +39,7 @@ The Tesla position was taken when short interest in the stock hit an all-time re
 
 ## How the data is built
 
-The portfolio is rebuilt from the 64 public transactions (22 Feb – 7 Apr 2016) with daily prices and FX from Yahoo Finance (stock splits applied, GBP converted to USD at each date's rate). A GitHub Action refreshes the data daily. The modelled value is within about 1% of the value reported by the platform. Caveat: the platform did not apply the 2022 Alphabet split to the Google position, and the site reproduces it as reported. Educational project: not investment advice.
+The portfolio is rebuilt from the 64 public transactions (22 Feb – 7 Apr 2016) with daily prices and FX from Yahoo Finance (stock splits applied, GBP converted to USD at each date's rate). A GitHub Action refreshes the data daily; if the remote data is unavailable, the last committed snapshot is used. The modelled value is within about 1% of the value reported by the platform. Caveat: the platform did not apply the 2022 Alphabet split to the Google position, and the site reproduces it as reported. Educational project: not investment advice.
 
 ## Links
 
