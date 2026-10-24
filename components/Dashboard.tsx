@@ -15,13 +15,13 @@ import {
   YAxis,
 } from "recharts";
 import { holdings } from "@/data/holdings";
-import { BENCHMARK_COLORS, PALETTE, SECTOR_COLORS } from "@/lib/colors";
-import { BENCHMARK_KEYS, PORTFOLIO_KEY, type Row, type Slice } from "@/lib/data";
+import { BENCHMARK_COLORS, FUND_COLORS, PALETTE, SECTOR_COLORS } from "@/lib/colors";
+import { PORTFOLIO_KEY, type Benchmark, type Row, type Slice } from "@/lib/data";
 
 interface Props {
   valueSeries: Row[];
   indexSeries: Row[];
-  benchmarkNames: Record<string, string>;
+  benchmarks: Record<string, Benchmark>;
   byAsset: Slice[];
   bySector: Slice[];
 }
@@ -48,12 +48,14 @@ const tooltipStyle = {
 export default function Dashboard({
   valueSeries,
   indexSeries,
-  benchmarkNames,
+  benchmarks: benchmarkDefs,
   byAsset,
   bySector,
 }: Props) {
   const [selected, setSelected] = useState<string[]>([]);
-  const [benchmarks, setBenchmarks] = useState<string[]>([...BENCHMARK_KEYS]);
+  const coreKeys = Object.keys(benchmarkDefs).filter((k) => benchmarkDefs[k].group === "core");
+  const fundKeys = Object.keys(benchmarkDefs).filter((k) => benchmarkDefs[k].group === "fund");
+  const [benchmarks, setBenchmarks] = useState<string[]>(coreKeys);
   const [mode, setMode] = useState<Mode>("value");
   const [pieMode, setPieMode] = useState<PieMode>("asset");
 
@@ -62,6 +64,9 @@ export default function Dashboard({
 
   const assetColor = (ticker: string) =>
     PALETTE[holdings.findIndex((h) => h.ticker === ticker) % PALETTE.length];
+
+  const benchmarkColor = (key: string) =>
+    BENCHMARK_COLORS[key] ?? FUND_COLORS[fundKeys.indexOf(key) % FUND_COLORS.length];
 
   const sliceColor = (key: string) =>
     pieMode === "sector" ? (SECTOR_COLORS[key] ?? "#94a3b8") : assetColor(key);
@@ -98,20 +103,22 @@ export default function Dashboard({
         <p className="note">
           {mode === "value"
             ? "Portfolio value, and what the same starting capital would be worth in each benchmark. Selected assets show the market value of the position held."
-            : "Everything rebased to 100 on the portfolio start date. Selected assets show the stock/commodity price performance."}
+            : "Everything rebased to 100 on the portfolio start date. Selected assets show the stock/commodity price performance."}{" "}
+          Besides the S&amp;P 500 and Berkshire, the comparison funds listed are those that returned
+          less than the portfolio over the same period.
         </p>
         <div className="chips">
           <span className="chip fixed">Portfolio</span>
-          {BENCHMARK_KEYS.map((k) => (
+          {[...coreKeys, ...fundKeys].map((k) => (
             <button
               key={k}
               type="button"
               className={`chip ${benchmarks.includes(k) ? "on" : ""}`}
-              style={{ ["--c" as string]: BENCHMARK_COLORS[k] }}
+              style={{ ["--c" as string]: benchmarkColor(k) }}
               aria-pressed={benchmarks.includes(k)}
               onClick={() => toggle(benchmarks, setBenchmarks, k)}
             >
-              {benchmarkNames[k]}
+              {benchmarkDefs[k].name}
             </button>
           ))}
           <span className="chips-sep" aria-hidden="true" />
@@ -163,8 +170,8 @@ export default function Dashboard({
                   key={k}
                   type="monotone"
                   dataKey={k}
-                  name={benchmarkNames[k]}
-                  stroke={BENCHMARK_COLORS[k]}
+                  name={benchmarkDefs[k].name}
+                  stroke={benchmarkColor(k)}
                   strokeWidth={2}
                   strokeDasharray="6 4"
                   dot={false}

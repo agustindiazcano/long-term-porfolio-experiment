@@ -109,7 +109,7 @@ export default function Home() {
         <Dashboard
           valueSeries={portfolio.valueSeries}
           indexSeries={portfolio.indexSeries}
-          benchmarkNames={meta.benchmarks}
+          benchmarks={meta.benchmarks}
           byAsset={compositionByAsset()}
           bySector={compositionBySector()}
         />

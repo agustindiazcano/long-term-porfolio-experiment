@@ -1,0 +1,12 @@
+[
+  { "key": "SP500", "symbol": "^SP500TR", "fallbackSymbol": "^GSPC", "name": "S&P 500 (total return)", "group": "core" },
+  { "key": "BRK", "symbol": "BRK-B", "name": "Berkshire Hathaway (BRK-B)", "group": "core" },
+  { "key": "ARKK", "symbol": "ARKK", "name": "ARK Innovation (ARKK)", "group": "fund", "adjusted": true },
+  { "key": "FCNTX", "symbol": "FCNTX", "name": "Fidelity Contrafund", "group": "fund", "adjusted": true },
+  { "key": "FMAGX", "symbol": "FMAGX", "name": "Fidelity Magellan", "group": "fund", "adjusted": true },
+  { "key": "OAKMX", "symbol": "OAKMX", "name": "Oakmark Fund", "group": "fund", "adjusted": true },
+  { "key": "FAIRX", "symbol": "FAIRX", "name": "Fairholme Fund", "group": "fund", "adjusted": true },
+  { "key": "TWEBX", "symbol": "TWEBX", "name": "Tweedy Browne Value", "group": "fund", "adjusted": true },
+  { "key": "URTH", "symbol": "URTH", "name": "MSCI World (URTH)", "group": "fund", "adjusted": true },
+  { "key": "QQQ", "symbol": "QQQ", "name": "Nasdaq-100 (QQQ)", "group": "fund", "adjusted": true }
+]

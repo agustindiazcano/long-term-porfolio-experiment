@@ -21,6 +21,9 @@ export const BENCHMARK_COLORS: Record<string, string> = {
   BRK: "#22d3ee",
 };
 
+// Colors for the comparison funds, assigned in order.
+export const FUND_COLORS = ["#fb7185", "#a3e635", "#c084fc", "#38bdf8", "#facc15", "#34d399", "#f472b6"];
+
 export const SECTOR_COLORS: Record<string, string> = {
   Commodities: "#f59e0b",
   Banks: "#3b82f6",

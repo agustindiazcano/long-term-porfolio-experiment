@@ -18,7 +18,7 @@ The Tesla position was taken when short interest hit an all-time record and mark
 
 - Explanation of the experiment and the data source.
 - Account performance indicators, all in **US dollars** (the platform reports in GBP; see below).
-- Historical chart (Feb 2016 to today) of the whole portfolio against the **S&P 500 (total return)** and **Berkshire Hathaway**, either as US$ value or indexed to 100, with each asset selectable to overlay it.
+- Historical chart (Feb 2016 to today) of the whole portfolio against the **S&P 500 (total return)**, **Berkshire Hathaway** and other well-known funds (ARK Innovation, Fidelity Contrafund and Magellan, Oakmark, Fairholme, Tweedy Browne, MSCI World), either as US$ value or indexed to 100, with each asset selectable to overlay it.
 - Pie chart of the current composition, **by asset or by sector** (commodities, banks, technology, retail & consumer, EV & clean energy, healthcare).
 - Dark (default) and light mode, sticky navigation, Roboto font.
 - Footer with the author and the month and year of the last update.
@@ -29,6 +29,7 @@ The portfolio is rebuilt from the 64 public transactions (22 Feb – 7 Apr 2016)
 
 - **Daily refresh:** a GitHub Actions cron job runs the script, commits the result and redeploys the site (`npm run update-data` does the same locally).
 - **Fallback:** if Yahoo Finance is unreachable or returns inconsistent data (more than 10% away from the reported value), the script keeps the committed snapshot in `data/generated/portfolio.json` and the build continues with it.
+- **Comparison funds:** candidates live in `data/benchmarks.json` (dividends included via adjusted prices). Besides the two core benchmarks, a fund is only shown if it returned less than the portfolio over the same period; the filter is recomputed on every refresh, so it can change over time.
 - **Validation:** the modelled value is within about 1% of the value reported by the platform, and per-asset profits match the reported ones.
 - **GBP to USD:** the initial £100,000 is converted at the GBP/USD rate of February 2016; current values at today's rate.
 - **Caveat:** the platform did not apply the 2022 Alphabet split to the Google position (35 shares); it is reproduced as reported.

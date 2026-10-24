@@ -1,7 +1,6 @@
 import portfolioJson from "@/data/generated/portfolio.json";
 
 export const PORTFOLIO_KEY = "PORTFOLIO";
-export const BENCHMARK_KEYS = ["SP500", "BRK"] as const;
 
 export type Row = { date: string } & Record<string, number | null | string>;
 
@@ -10,6 +9,11 @@ export interface Slice {
   name: string;
   value: number;
   pct: number;
+}
+
+export interface Benchmark {
+  name: string;
+  group: "core" | "fund";
 }
 
 interface Generated {
@@ -21,7 +25,8 @@ interface Generated {
     gbpUsdStart: number;
     initialCapitalUsd: number;
     modelValueUsd: number;
-    benchmarks: Record<(typeof BENCHMARK_KEYS)[number], string>;
+    benchmarks: Record<string, Benchmark>;
+    excludedBenchmarks: { key: string; name: string; multiple: number }[];
   };
   valueSeries: Row[];
   indexSeries: Row[];

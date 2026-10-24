@@ -23,7 +23,7 @@ The platform reports in pounds (£); this site shows everything in US dollars.
 - Invested capital: £555,144.32 · Available capital: £42,363.51 · Balance: £48,731.61
 - Margin used: £6,368.09 · Commissions paid: £422.18
 
-Over the same period (same starting capital, in USD): S&P 500 total return about 4.7x, Berkshire Hathaway about 4.1x.
+Over the same period (same starting capital, in USD): S&P 500 total return about 4.7x, Berkshire Hathaway about 4.1x. The site also compares against well-known funds (ARK Innovation, Fidelity Contrafund and Magellan, Oakmark, Fairholme, Tweedy Browne, MSCI World), showing only those that returned less than the portfolio over the same period.
 
 ## The Tesla case
 

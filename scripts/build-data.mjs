@@ -9,11 +9,12 @@ const readJson = async (p) => JSON.parse(await readFile(new URL(p, root), "utf8"
 const holdings = await readJson("data/holdings.json");
 const transactions = await readJson("data/transactions.json");
 const account = await readJson("data/account.json");
+const benchmarkDefs = await readJson("data/benchmarks.json");
 const START = account.startDate;
 const CHART_FROM = "2016-01-01";
 
 // ---------- Yahoo Finance ----------
-async function fetchSeries(symbol, attempts = 3) {
+async function fetchSeries(symbol, adjusted = false, attempts = 3) {
   const p1 = Math.floor(Date.UTC(2015, 11, 1) / 1000);
   const p2 = Math.floor(Date.now() / 1000) + 86400;
   const url = `${process.env.YAHOO_BASE ?? "https://query1.finance.yahoo.com"}/v8/finance/chart/${encodeURIComponent(
@@ -30,7 +31,7 @@ async function fetchSeries(symbol, attempts = 3) {
       const off = r.meta.gmtoffset ?? 0;
       const close = new Map();
       r.timestamp.forEach((ts, idx) => {
-        const c = r.indicators.quote[0].close[idx];
+        const c = (adjusted && r.indicators.adjclose?.[0]?.adjclose?.[idx]) || r.indicators.quote[0].close[idx];
         if (c != null) close.set(new Date((ts + off) * 1000).toISOString().slice(0, 10), c);
       });
       const splits = Object.values(r.events?.splits ?? {}).map((s) => ({
@@ -46,21 +47,27 @@ async function fetchSeries(symbol, attempts = 3) {
   throw new Error(`Yahoo ${symbol}: ${lastErr?.message}`);
 }
 
-const needed = new Set(holdings.map((h) => h.symbol));
-["^GSPC", "^SP500TR", "BRK-B", "GBPUSD=X", "EURUSD=X", "ARS=X"].forEach((s) => needed.add(s));
+const needed = new Map(holdings.map((h) => [h.symbol, false]));
+["^GSPC", "GBPUSD=X", "EURUSD=X", "ARS=X"].forEach((s) => needed.set(s, false));
+for (const b of benchmarkDefs) {
+  needed.set(b.symbol, !!b.adjusted);
+  if (b.fallbackSymbol) needed.set(b.fallbackSymbol, !!b.adjusted);
+}
+// Optional data: a failure here degrades gracefully instead of aborting the refresh.
+const optional = new Set(["EURUSD=X", "ARS=X"]);
+benchmarkDefs.forEach((b) => (b.group === "fund" || b.fallbackSymbol) && optional.add(b.symbol));
 const data = {};
-for (const s of needed) {
+for (const [s, adjusted] of needed) {
   try {
-    data[s] = await fetchSeries(s);
+    data[s] = await fetchSeries(s, adjusted);
   } catch (e) {
-    if (["^SP500TR", "EURUSD=X", "ARS=X"].includes(s)) console.warn(`warn: ${e.message} (using fallback)`);
+    if (optional.has(s)) console.warn(`warn: ${e.message} (skipped)`);
     else throw e;
   }
 }
 
 // ---------- helpers ----------
 const calendar = [...data["^GSPC"].close.keys()].filter((d) => d >= CHART_FROM).sort();
-const sp500Key = data["^SP500TR"] ? "^SP500TR" : "^GSPC";
 
 const ffCache = {};
 function px(symbol, date) {
@@ -150,19 +157,37 @@ function equityAt(date) {
 }
 
 // ---------- series ----------
-const bench = {
-  SP500: { key: sp500Key },
-  BRK: { key: "BRK-B" },
-};
-const scale = {};
-for (const b of Object.values(bench)) b.scale = initialUsd / px(b.key, START);
+// Benchmarks start with the same capital as the portfolio on the start date.
+const bench = benchmarkDefs
+  .map((b) => {
+    const symbol = data[b.symbol] ? b.symbol : b.fallbackSymbol;
+    const label = symbol === b.symbol ? b.name : b.name.replace("total return", "price");
+    return symbol && data[symbol] && data[symbol].close.size > 0
+      ? { ...b, symbol, name: label, scale: initialUsd / px(symbol, START) }
+      : null;
+  })
+  .filter(Boolean);
 
+const r2 = (n) => (n == null ? null : Math.round(n * 100) / 100);
 const days = [];
 for (const date of calendar) {
   while (txIdx < transactions.length && transactions[txIdx].date <= date) applyTrade(transactions[txIdx++]);
   const { total, values } = equityAt(date);
-  days.push({ date, total, values, SP500: px(bench.SP500.key, date) * bench.SP500.scale, BRK: px(bench.BRK.key, date) * bench.BRK.scale });
+  days.push({
+    date,
+    total,
+    values,
+    bench: Object.fromEntries(bench.map((b) => [b.key, px(b.symbol, date) * b.scale])),
+  });
 }
+
+// Funds are only shown when they returned less than the portfolio over the same period.
+const portfolioMultiple = days[days.length - 1].total / initialUsd;
+const multipleOfBench = (b) => days[days.length - 1].bench[b.key] / initialUsd;
+const shown = bench.filter((b) => b.group === "core" || multipleOfBench(b) < portfolioMultiple);
+const excluded = bench
+  .filter((b) => !shown.includes(b))
+  .map((b) => ({ key: b.key, name: b.name, multiple: r2(multipleOfBench(b)) }));
 
 // weekly sampling (last trading day of each week) + the final day
 const weekKey = (d) => {
@@ -172,31 +197,24 @@ const weekKey = (d) => {
 };
 const sampled = days.filter((d, i) => i === days.length - 1 || weekKey(d.date) !== weekKey(days[i + 1].date));
 
-const r2 = (n) => (n == null ? null : Math.round(n * 100) / 100);
 const tickers = holdings.map((h) => h.ticker);
 const valueSeries = sampled.map((d) => ({
   date: d.date,
   PORTFOLIO: r2(d.total),
-  SP500: r2(d.SP500),
-  BRK: r2(d.BRK),
+  ...Object.fromEntries(shown.map((b) => [b.key, r2(d.bench[b.key])])),
   ...Object.fromEntries(tickers.map((t) => [t, r2(d.values[t] ?? null)])),
 }));
 
 // Indexed series (start date = 100). Assets use their market price (split-adjusted).
 const startDay = days.find((d) => d.date >= START);
-const base = {
-  PORTFOLIO: startDay.total,
-  SP500: startDay.SP500,
-  BRK: startDay.BRK,
-};
+const base = { PORTFOLIO: startDay.total, ...startDay.bench };
 const assetBase = Object.fromEntries(
   holdings.map((h) => [h.ticker, px(h.symbol, startDay.date)]),
 );
 const indexSeries = sampled.map((d) => ({
   date: d.date,
   PORTFOLIO: r2((d.total / base.PORTFOLIO) * 100),
-  SP500: r2((d.SP500 / base.SP500) * 100),
-  BRK: r2((d.BRK / base.BRK) * 100),
+  ...Object.fromEntries(shown.map((b) => [b.key, r2((d.bench[b.key] / base[b.key]) * 100)])),
   ...Object.fromEntries(
     holdings.map((h) => [
       h.ticker,
@@ -247,10 +265,8 @@ const out = {
     gbpUsdStart: r2(px("GBPUSD=X", START) * 10000) / 10000,
     initialCapitalUsd: r2(initialUsd),
     modelValueUsd: r2(last.total),
-    benchmarks: {
-      SP500: sp500Key === "^SP500TR" ? "S&P 500 (total return)" : "S&P 500 (price)",
-      BRK: "Berkshire Hathaway (BRK-B)",
-    },
+    benchmarks: Object.fromEntries(shown.map((b) => [b.key, { name: b.name, group: b.group }])),
+    excludedBenchmarks: excluded,
     source: "Yahoo Finance (prices, FX) + La Bolsa Virtual transactions",
   },
   valueSeries,
@@ -271,4 +287,6 @@ console.log(`as of ${last.date} | GBPUSD ${gbpUsd.toFixed(4)} | initial $${initi
 console.log(`model $${last.total.toFixed(0)} vs reported $${reportedUsd.toFixed(0)} (${reconciliation.differencePct}%)`);
 console.table(reconciliation.perAsset);
 const s = valueSeries[valueSeries.length - 1];
-console.log(`portfolio ${s.PORTFOLIO} | S&P ${s.SP500} | BRK ${s.BRK}`);
+console.log(`portfolio ${(s.PORTFOLIO / initialUsd).toFixed(2)}x`);
+for (const b of shown) console.log(`  shown    ${b.name}: ${multipleOfBench(b).toFixed(2)}x`);
+for (const b of excluded) console.log(`  excluded ${b.name}: ${b.multiple}x`);
