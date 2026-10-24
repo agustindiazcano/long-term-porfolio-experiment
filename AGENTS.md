@@ -31,10 +31,14 @@ Static front end (Next.js + TypeScript, `output: "export"`) that visualizes a bu
 - Whenever the `README.md` or the project changes (data, sections, stack, URLs), **check whether `public/llms.txt` needs updating** and do it in the same commit.
 - `public/robots.txt` holds the user-agent list provided by the owner; do not trim it without asking.
 
-## Data source
+## Data source and pipeline
 
 - The portfolio is public (La Bolsa Virtual, profile marcelogallardiola, 2016 transactions unmodified). Keep that mention on the site, in the README and in `llms.txt`.
-- The data in `data/holdings.ts` (weights and series) is illustrative until the real data is loaded; do not present it as real.
+- Everything on the site is in **US dollars**. The platform reports in GBP; convert with GBP/USD (initial capital at the start-date rate, current values at today's rate).
+- `data/transactions.json` (the 64 real operations), `data/holdings.json` and `data/account.json` are the inputs. `scripts/update-data.mjs` fetches prices from Yahoo Finance and writes `data/generated/portfolio.json`, which the site reads at build time. Never hand-edit the generated file.
+- The workflow refreshes the data daily (cron) and on manual runs, commits `data/generated/portfolio.json`, then builds and deploys. Pull before pushing, since the bot commits to `main`.
+- After changing the pipeline, run `npm run update-data` and check the reconciliation output (model vs reported value should stay within ~1-2%).
+- Google (GOOGL) has `noSplitAdjust` because the platform never applied the 2022 split to that position; keep it unless the platform fixes it.
 
 ## Conventions
 

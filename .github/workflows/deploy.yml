@@ -3,10 +3,13 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # Every day at 22:30 UTC (after the US market close): refresh prices and redeploy.
+    - cron: "30 22 * * *"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -24,6 +27,19 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+
+      # Refresh market data (Yahoo Finance) and commit it when it changed.
+      - name: Update portfolio data
+        if: github.event_name != 'push'
+        run: node scripts/update-data.mjs
+      - name: Commit updated data
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/portfolio.json
+          git diff --staged --quiet || (git commit -m "chore: daily data update" && git push)
+
       - run: npm run typecheck
       - run: npm run build
         env:

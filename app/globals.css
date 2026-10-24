@@ -175,7 +175,7 @@ h2 { margin: 0 0 14px; font-size: 1.25rem; font-weight: 700; }
 
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
   margin: 0;
 }
@@ -188,6 +188,7 @@ h2 { margin: 0 0 14px; font-size: 1.25rem; font-weight: 700; }
 }
 .stat dt { color: var(--muted); font-size: 0.78rem; font-weight: 500; }
 .stat dd { margin: 6px 0 0; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
+.stat dd.sub { margin: 0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0; color: var(--muted); }
 
 /* ---------- Cards ---------- */
 .card {
@@ -223,6 +224,15 @@ h2 { margin: 0 0 14px; font-size: 1.25rem; font-weight: 700; }
 .kpi dd { margin: 4px 0 0; font-size: 1.1rem; font-weight: 700; }
 
 /* ---------- Charts ---------- */
+.card-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 6px; }
+.card-head h2 { margin: 0; }
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; padding: 3px; background: var(--card); }
+.seg button {
+  border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 0.82rem; font-weight: 500;
+  padding: 5px 14px; border-radius: 999px; cursor: pointer; transition: background 0.15s, color 0.15s;
+}
+.seg button.on { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; }
+.chips-sep { width: 1px; background: var(--border); margin: 2px 4px; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 .chip {
   border: 1px solid var(--c, var(--border));

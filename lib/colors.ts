@@ -15,3 +15,17 @@ export const PALETTE = [
   "#10b981",
   "#f43f5e",
 ];
+
+export const BENCHMARK_COLORS: Record<string, string> = {
+  SP500: "#f59e0b",
+  BRK: "#22d3ee",
+};
+
+export const SECTOR_COLORS: Record<string, string> = {
+  Commodities: "#f59e0b",
+  Banks: "#3b82f6",
+  Technology: "#a855f7",
+  "Retail & Consumer": "#22c55e",
+  "EV & Clean Energy": "#06b6d4",
+  Healthcare: "#ec4899",
+};

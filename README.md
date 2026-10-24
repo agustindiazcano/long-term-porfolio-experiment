@@ -17,13 +17,21 @@ The Tesla position was taken when short interest hit an all-time record and mark
 ## What it shows
 
 - Explanation of the experiment and the data source.
-- Account performance indicators (initial capital, account value, invested capital, commissions, etc.).
-- Historical chart of the whole portfolio (base 100 = March 2016), with the option to select each asset and overlay it.
-- Pie chart of the portfolio composition.
-- Dark (default) and light mode.
-- Footer with the author and the month and year of the last update, recomputed on every deploy.
+- Account performance indicators, all in **US dollars** (the platform reports in GBP; see below).
+- Historical chart (Feb 2016 to today) of the whole portfolio against the **S&P 500 (total return)** and **Berkshire Hathaway**, either as US$ value or indexed to 100, with each asset selectable to overlay it.
+- Pie chart of the current composition, **by asset or by sector** (commodities, banks, technology, retail & consumer, EV & clean energy, healthcare).
+- Dark (default) and light mode, sticky navigation, Roboto font.
+- Footer with the author and the month and year of the last update.
 
-> ⚠️ The account figures come from the public portfolio, but the **charts use illustrative data** (initial weights and per-asset performance) until the real transactions are loaded. Replace them by editing `data/holdings.ts` and `lib/data.ts`.
+## How the data works
+
+The portfolio is rebuilt from the 64 public transactions (22 Feb – 7 Apr 2016) in `data/transactions.json`, with daily prices and FX from Yahoo Finance. `scripts/update-data.mjs` computes the portfolio value in USD (stock splits applied, CFDs marked to market, GBP/USD of each date) and writes `data/generated/portfolio.json`, which the site reads at build time.
+
+- **Daily refresh:** a GitHub Actions cron job runs the script, commits the result and redeploys the site (`npm run update-data` does the same locally).
+- **Validation:** the modelled value is within about 1% of the value reported by the platform, and per-asset profits match the reported ones.
+- **GBP to USD:** the initial £100,000 is converted at the GBP/USD rate of February 2016; current values at today's rate.
+- **Caveat:** the platform did not apply the 2022 Alphabet split to the Google position (35 shares); it is reproduced as reported.
+- **Dates:** the account was opened on 22 Feb 2016; the portfolio as it stands today was built between 2 and 8 March 2016.
 
 ## SEO and LLMs
 
@@ -41,12 +49,13 @@ Next.js (App Router, static export) · TypeScript · Recharts
 npm install
 npm run dev        # http://localhost:3000
 npm run typecheck
+npm run update-data  # refresh prices from Yahoo Finance
 npm run build      # outputs ./out
 ```
 
 ## Deploying to GitHub Pages
 
-The `.github/workflows/deploy.yml` workflow builds and publishes on every push to `main` (Pages source set to GitHub Actions). The `basePath` is taken from the repo name (`NEXT_PUBLIC_BASE_PATH`). Since every push triggers a build, the footer's "Last update" reflects the month and year of the last push.
+The `.github/workflows/deploy.yml` workflow builds and publishes on every push to `main` (Pages source set to GitHub Actions). The workflow also runs daily (cron) to refresh the data. The `basePath` is taken from the repo name (`NEXT_PUBLIC_BASE_PATH`). Since every push triggers a build, the footer's "Last update" reflects the month and year of the last push.
 
 > Note: crawlers only read `robots.txt` at the domain root; on a project page (`user.github.io/repo/`) that root is not under your control. With a custom domain it works as is.
 

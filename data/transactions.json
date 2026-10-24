@@ -1,0 +1,514 @@
+[
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "META",
+  "qty": 93,
+  "price": 107.13,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "XOM",
+  "qty": 121,
+  "price": 82.44,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "CVX",
+  "qty": 112,
+  "price": 89.19,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "JPM",
+  "qty": 85,
+  "price": 58.53,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "CAT",
+  "qty": 74,
+  "price": 67.15,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "BABA",
+  "qty": 145,
+  "price": 69.21,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "FSLR",
+  "qty": 78,
+  "price": 64.06,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "GE",
+  "qty": 170,
+  "price": 29.44,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "TSLA",
+  "qty": 113,
+  "price": 176.85,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "PG",
+  "qty": 61,
+  "price": 82.09,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "GOOGL",
+  "qty": 28,
+  "price": 705.51,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "SBUX",
+  "qty": 85,
+  "price": 58.77,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "WTI",
+  "qty": 900,
+  "price": 33.33,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-22",
+  "side": "buy",
+  "asset": "XAG",
+  "qty": 658,
+  "price": 15.19,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-02-23",
+  "side": "buy",
+  "asset": "SAN",
+  "qty": 1366,
+  "price": 3.61,
+  "currency": "EUR"
+ },
+ {
+  "date": "2016-02-23",
+  "side": "buy",
+  "asset": "YPF",
+  "qty": 351,
+  "price": 285.01,
+  "currency": "ARS"
+ },
+ {
+  "date": "2016-02-23",
+  "side": "buy",
+  "asset": "TS",
+  "qty": 601,
+  "price": 167.5,
+  "currency": "ARS"
+ },
+ {
+  "date": "2016-03-01",
+  "side": "sell",
+  "asset": "CVX",
+  "qty": 112,
+  "price": 84.17,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-01",
+  "side": "sell",
+  "asset": "XOM",
+  "qty": 121,
+  "price": 80.62,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-01",
+  "side": "buy",
+  "asset": "TSLA",
+  "qty": 26,
+  "price": 194.84,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-01",
+  "side": "sell",
+  "asset": "FSLR",
+  "qty": 78,
+  "price": 70.85,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-01",
+  "side": "sell",
+  "asset": "YPF",
+  "qty": 351,
+  "price": 285.4,
+  "currency": "ARS"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "SAN",
+  "qty": 1366,
+  "price": 3.89,
+  "currency": "EUR"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "TS",
+  "qty": 601,
+  "price": 174.99,
+  "currency": "ARS"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "BABA",
+  "qty": 145,
+  "price": 71.61,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "CAT",
+  "qty": 74,
+  "price": 68.65,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "META",
+  "qty": 93,
+  "price": 109.75,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "GE",
+  "qty": 170,
+  "price": 29.8,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "GOOGL",
+  "qty": 28,
+  "price": 717.81,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "JPM",
+  "qty": 85,
+  "price": 59.07,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "PG",
+  "qty": 61,
+  "price": 81.51,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "sell",
+  "asset": "SBUX",
+  "qty": 85,
+  "price": 59.8,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "AMZN",
+  "qty": 21,
+  "price": 575.0,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "BABA",
+  "qty": 169,
+  "price": 71.19,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "AAPL",
+  "qty": 120,
+  "price": 99.84,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "CAT",
+  "qty": 74,
+  "price": 68.98,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "META",
+  "qty": 184,
+  "price": 108.96,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "GE",
+  "qty": 170,
+  "price": 30.02,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "GOOGL",
+  "qty": 35,
+  "price": 714.09,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "JPM",
+  "qty": 85,
+  "price": 59.32,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "SBUX",
+  "qty": 160,
+  "price": 58.87,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-02",
+  "side": "buy",
+  "asset": "TS",
+  "qty": 601,
+  "price": 173.75,
+  "currency": "ARS"
+ },
+ {
+  "date": "2016-03-03",
+  "side": "sell",
+  "asset": "CAT",
+  "qty": 74,
+  "price": 71.73,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-03",
+  "side": "sell",
+  "asset": "TSLA",
+  "qty": 139,
+  "price": 195.6,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-04",
+  "side": "sell",
+  "asset": "TS",
+  "qty": 601,
+  "price": 164.99,
+  "currency": "ARS"
+ },
+ {
+  "date": "2016-03-04",
+  "side": "sell",
+  "asset": "BABA",
+  "qty": 169,
+  "price": 72.61,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-04",
+  "side": "buy",
+  "asset": "GE",
+  "qty": 986,
+  "price": 30.41,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-04",
+  "side": "buy",
+  "asset": "NLOK",
+  "qty": 602,
+  "price": 16.66,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-04",
+  "side": "buy",
+  "asset": "CVX",
+  "qty": 56,
+  "price": 88.49,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-04",
+  "side": "buy",
+  "asset": "FSLR",
+  "qty": 71,
+  "price": 70.47,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-04",
+  "side": "buy",
+  "asset": "VRTX",
+  "qty": 33,
+  "price": 89.72,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-07",
+  "side": "buy",
+  "asset": "BABA",
+  "qty": 14,
+  "price": 73.62,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-07",
+  "side": "sell",
+  "asset": "GE",
+  "qty": 1156,
+  "price": 30.31,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-07",
+  "side": "buy",
+  "asset": "BABA",
+  "qty": 408,
+  "price": 73.56,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-07",
+  "side": "buy",
+  "asset": "WTI",
+  "qty": 134,
+  "price": 37.47,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-07",
+  "side": "buy",
+  "asset": "WTI",
+  "qty": 80,
+  "price": 37.61,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-08",
+  "side": "buy",
+  "asset": "XAU",
+  "qty": 2,
+  "price": 1276.04,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-08",
+  "side": "sell",
+  "asset": "WTI",
+  "qty": 1114,
+  "price": 37.61,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-08",
+  "side": "buy",
+  "asset": "XAU",
+  "qty": 3,
+  "price": 1276.04,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-08",
+  "side": "buy",
+  "asset": "NG",
+  "qty": 1165,
+  "price": 1.72,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-08",
+  "side": "buy",
+  "asset": "XAG",
+  "qty": 128,
+  "price": 15.67,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-08",
+  "side": "sell",
+  "asset": "CVX",
+  "qty": 56,
+  "price": 90.22,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-03-14",
+  "side": "buy",
+  "asset": "WTI",
+  "qty": 190,
+  "price": 36.82,
+  "currency": "USD"
+ },
+ {
+  "date": "2016-04-07",
+  "side": "buy",
+  "asset": "TSLA",
+  "qty": 38,
+  "price": 264.82,
+  "currency": "USD"
+ }
+]

@@ -1,69 +1,59 @@
-import { holdings, START_DATE } from "@/data/holdings";
+import portfolioJson from "@/data/generated/portfolio.json";
 
 export const PORTFOLIO_KEY = "PORTFOLIO";
+export const BENCHMARK_KEYS = ["SP500", "BRK"] as const;
 
-export type Row = { date: string } & Record<string, number | string>;
+export type Row = { date: string } & Record<string, number | null | string>;
 
-const totalWeight = holdings.reduce((a, h) => a + h.weight, 0);
+export interface Slice {
+  key: string;
+  name: string;
+  value: number;
+  pct: number;
+}
 
-// Deterministic PRNG so the illustrative series is stable across builds.
-function mulberry32(seed: number) {
-  return () => {
-    seed |= 0;
-    seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+interface Generated {
+  meta: {
+    generatedAt: string;
+    asOf: string;
+    startDate: string;
+    gbpUsdNow: number;
+    gbpUsdStart: number;
+    initialCapitalUsd: number;
+    modelValueUsd: number;
+    benchmarks: Record<(typeof BENCHMARK_KEYS)[number], string>;
   };
+  valueSeries: Row[];
+  indexSeries: Row[];
+  composition: { ticker: string; name: string; sector: string; value: number }[];
 }
 
-function monthsBetween(start: string, end: Date): string[] {
-  const [y, m] = start.split("-").map(Number);
-  const out: string[] = [];
-  let year = y;
-  let month = m;
-  while (year < end.getFullYear() || (year === end.getFullYear() && month <= end.getMonth() + 1)) {
-    out.push(`${year}-${String(month).padStart(2, "0")}`);
-    month++;
-    if (month > 12) {
-      month = 1;
-      year++;
-    }
+export const portfolio = portfolioJson as unknown as Generated;
+
+function toSlices(items: { key: string; name: string; value: number }[]): Slice[] {
+  const total = items.reduce((a, i) => a + i.value, 0);
+  return items
+    .filter((i) => i.value > 0)
+    .map((i) => ({ ...i, pct: (i.value / total) * 100 }))
+    .sort((a, b) => b.pct - a.pct);
+}
+
+export function compositionByAsset(): Slice[] {
+  return toSlices(
+    portfolio.composition.map((c) => ({ key: c.ticker, name: c.name, value: c.value })),
+  );
+}
+
+export function compositionBySector(): Slice[] {
+  const bySector = new Map<string, number>();
+  for (const c of portfolio.composition) {
+    bySector.set(c.sector, (bySector.get(c.sector) ?? 0) + c.value);
   }
-  return out;
+  return toSlices([...bySector].map(([sector, value]) => ({ key: sector, name: sector, value })));
 }
 
-/** Monthly base-100 series per asset + the portfolio (buy & hold, no rebalancing). */
-export function buildSeries(): Row[] {
-  const dates = monthsBetween(START_DATE, new Date());
-  const levels = holdings.map(() => 100);
-  const rngs = holdings.map((_, i) => mulberry32(1000 + i * 77));
-
-  return dates.map((date, idx) => {
-    const row: Row = { date };
-    holdings.forEach((h, i) => {
-      if (idx > 0) {
-        const shock = (rngs[i]() - 0.5) * 2 * h.vol;
-        levels[i] *= 1 + h.drift + shock;
-      }
-      row[h.ticker] = Number(levels[i].toFixed(2));
-    });
-    row[PORTFOLIO_KEY] = Number(
-      holdings.reduce((acc, h, i) => acc + (h.weight / totalWeight) * levels[i], 0).toFixed(2),
-    );
-    return row;
-  });
-}
-
-/** Current composition: the initial weight carried forward by each position's performance. */
-export function currentComposition(series: Row[]) {
-  const last = series[series.length - 1];
-  const values = holdings.map((h) => ({
-    ticker: h.ticker,
-    name: h.name,
-    sector: h.sector,
-    value: (h.weight / totalWeight) * (last[h.ticker] as number),
-  }));
-  const total = values.reduce((a, v) => a + v.value, 0);
-  return values.map((v) => ({ ...v, pct: (v.value / total) * 100 }));
+/** Final value of a series divided by its starting value (index series start at 100). */
+export function multipleOf(key: string): number {
+  const last = portfolio.indexSeries[portfolio.indexSeries.length - 1];
+  return (last[key] as number) / 100;
 }

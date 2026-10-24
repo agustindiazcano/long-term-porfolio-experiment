@@ -15,15 +15,15 @@ It contains all the 2016 evidence transactions, unmodified. This site only visua
 
 Gold, Crude Oil, JP Morgan Chase, Facebook (Meta), Alibaba, First Solar, Tesla Motors, Google (Alphabet), Starbucks, Silver, Amazon.com, Apple, NortonLifeLock (Symantec), Vertex Pharmaceuticals, Natural Gas (commodity).
 
-## Account status (October 2026, in pounds £)
+## Account status (October 2026)
 
-- Initial capital: £100,000.00
-- Account value: £603,875.93 (about 6x, ~18-19% annualized)
-- Invested capital: £555,144.32
-- Available capital: £42,363.51
-- Balance: £48,731.61
-- Margin used: £6,368.09
-- Commissions paid: £422.18
+The platform reports in pounds (£); this site shows everything in US dollars.
+- Initial capital: £100,000 (about US$142,700 at the February 2016 GBP/USD rate)
+- Account value: £603,875.93 (about US$807,700 at today's rate), roughly 5.7x in USD terms
+- Invested capital: £555,144.32 · Available capital: £42,363.51 · Balance: £48,731.61
+- Margin used: £6,368.09 · Commissions paid: £422.18
+
+Over the same period (same starting capital, in USD): S&P 500 total return about 4.7x, Berkshire Hathaway about 4.1x.
 
 ## The Tesla case
 
@@ -32,14 +32,14 @@ The Tesla position was taken when short interest in the stock hit an all-time re
 ## What the site shows
 
 - Explanation of the experiment and the data source.
-- Account performance indicators.
-- Historical chart of the whole portfolio (base 100 = March 2016) with per-asset selection to overlay each one.
-- Pie chart of the portfolio composition.
+- Account performance indicators in US dollars.
+- Historical chart (Feb 2016 to today) of the portfolio vs the S&P 500 (total return) and Berkshire Hathaway, as US$ value or indexed to 100, with per-asset overlay.
+- Pie chart of the composition, by asset or by sector.
 - Dark (default) and light mode.
 
-## Limitations
+## How the data is built
 
-The per-asset performance charts and the composition weights are illustrative until the real transactions are loaded; the account figures do correspond to the public portfolio. Educational project: not investment advice.
+The portfolio is rebuilt from the 64 public transactions (22 Feb – 7 Apr 2016) with daily prices and FX from Yahoo Finance (stock splits applied, GBP converted to USD at each date's rate). A GitHub Action refreshes the data daily. The modelled value is within about 1% of the value reported by the platform. Caveat: the platform did not apply the 2022 Alphabet split to the Google position, and the site reproduces it as reported. Educational project: not investment advice.
 
 ## Links
 

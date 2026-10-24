@@ -1,0 +1,138 @@
+[
+ {
+  "ticker": "XAU",
+  "name": "Gold",
+  "sector": "Commodities",
+  "symbol": "GC=F",
+  "kind": "cfd",
+  "reportedProfitGbp": 10502.16,
+  "reportedPriceUsd": 4010.0
+ },
+ {
+  "ticker": "WTI",
+  "name": "Crude Oil",
+  "sector": "Commodities",
+  "symbol": "CL=F",
+  "kind": "cfd",
+  "reportedProfitGbp": 9798.14,
+  "reportedPriceUsd": 103.44
+ },
+ {
+  "ticker": "JPM",
+  "name": "JP Morgan Chase",
+  "sector": "Banks",
+  "symbol": "JPM",
+  "kind": "stock",
+  "reportedProfitGbp": 17463.37,
+  "reportedPriceUsd": 331.58
+ },
+ {
+  "ticker": "META",
+  "name": "Facebook (Meta)",
+  "sector": "Technology",
+  "symbol": "META",
+  "kind": "stock",
+  "reportedProfitGbp": 74030.72,
+  "reportedPriceUsd": 642.62
+ },
+ {
+  "ticker": "BABA",
+  "name": "Alibaba",
+  "sector": "Retail & Consumer",
+  "symbol": "BABA",
+  "kind": "stock",
+  "reportedProfitGbp": 9572.81,
+  "reportedPriceUsd": 99.64
+ },
+ {
+  "ticker": "FSLR",
+  "name": "First Solar",
+  "sector": "EV & Clean Energy",
+  "symbol": "FSLR",
+  "kind": "stock",
+  "reportedProfitGbp": 5590.78,
+  "reportedPriceUsd": 171.99
+ },
+ {
+  "ticker": "TSLA",
+  "name": "Tesla Motors",
+  "sector": "EV & Clean Energy",
+  "symbol": "TSLA",
+  "kind": "stock",
+  "reportedProfitGbp": 151263.7,
+  "reportedPriceUsd": 372.22
+ },
+ {
+  "ticker": "GOOGL",
+  "name": "Google (Alphabet)",
+  "sector": "Technology",
+  "symbol": "GOOGL",
+  "kind": "stock",
+  "reportedProfitGbp": -9476.27,
+  "reportedPriceUsd": 317.28,
+  "noSplitAdjust": true
+ },
+ {
+  "ticker": "SBUX",
+  "name": "Starbucks",
+  "sector": "Retail & Consumer",
+  "symbol": "SBUX",
+  "kind": "stock",
+  "reportedProfitGbp": 5347.42,
+  "reportedPriceUsd": 100.8
+ },
+ {
+  "ticker": "XAG",
+  "name": "Silver",
+  "sector": "Commodities",
+  "symbol": "SI=F",
+  "kind": "cfd",
+  "reportedProfitGbp": 23219.55,
+  "reportedPriceUsd": 53.96
+ },
+ {
+  "ticker": "AMZN",
+  "name": "Amazon.com",
+  "sector": "Retail & Consumer",
+  "symbol": "AMZN",
+  "kind": "stock",
+  "reportedProfitGbp": 69191.08,
+  "reportedPriceUsd": 248.0
+ },
+ {
+  "ticker": "AAPL",
+  "name": "Apple",
+  "sector": "Technology",
+  "symbol": "AAPL",
+  "kind": "stock",
+  "reportedProfitGbp": 116111.99,
+  "reportedPriceUsd": 347.725
+ },
+ {
+  "ticker": "NLOK",
+  "name": "NortonLifeLock (Symantec)",
+  "sector": "Technology",
+  "symbol": "GEN",
+  "kind": "stock",
+  "reportedProfitGbp": 4204.62,
+  "reportedPriceUsd": 21.62
+ },
+ {
+  "ticker": "VRTX",
+  "name": "Vertex Pharmaceuticals",
+  "sector": "Healthcare",
+  "symbol": "VRTX",
+  "kind": "stock",
+  "reportedProfitGbp": 10819.99,
+  "reportedPriceUsd": 523.93
+ },
+ {
+  "ticker": "NG",
+  "name": "Natural Gas (commodity)",
+  "sector": "Commodities",
+  "symbol": "NG=F",
+  "kind": "cfd",
+  "reportedProfitGbp": 884.8,
+  "reportedPriceUsd": 2.63
+ }
+]
