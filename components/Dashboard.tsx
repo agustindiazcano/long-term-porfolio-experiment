@@ -34,8 +34,8 @@ export default function Dashboard({ series, composition }: Props) {
 
   return (
     <>
-      <section className="card">
-        <h2>Historical performance (base 100 = March 2016)</h2>
+      <section className="card" id="history" aria-labelledby="history-h">
+        <h2 id="history-h">Historical performance (base 100 = March 2016)</h2>
         <div className="chips">
           <span className="chip fixed">Total portfolio</span>
           {holdings.map((h) => (
@@ -55,10 +55,10 @@ export default function Dashboard({ series, composition }: Props) {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={series} margin={{ top: 8, right: 16, bottom: 0, left: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--grid)" />
-              <XAxis dataKey="date" minTickGap={48} tick={{ fontSize: 12 }} />
-              <YAxis tick={{ fontSize: 12 }} width={44} />
-              <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", color: "var(--fg)" }} />
-              <Legend />
+              <XAxis dataKey="date" minTickGap={48} tick={{ fontSize: 12, fill: "var(--muted)" }} stroke="var(--grid)" />
+              <YAxis tick={{ fontSize: 12, fill: "var(--muted)" }} stroke="var(--grid)" width={44} />
+              <Tooltip contentStyle={{ background: "var(--card-solid)", border: "1px solid var(--border)", borderRadius: 10, color: "var(--fg)" }} itemStyle={{ color: "var(--fg)" }} />
+              <Legend wrapperStyle={{ color: "var(--muted)", fontSize: 13 }} />
               <Line
                 type="monotone"
                 dataKey={PORTFOLIO_KEY}
@@ -82,8 +82,8 @@ export default function Dashboard({ series, composition }: Props) {
         </div>
       </section>
 
-      <section className="card">
-        <h2>Current portfolio composition</h2>
+      <section className="card" id="composition" aria-labelledby="composition-h">
+        <h2 id="composition-h">Current portfolio composition</h2>
         <div className="chart pie">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -101,7 +101,7 @@ export default function Dashboard({ series, composition }: Props) {
                   <Cell key={c.ticker} fill={colorOf(c.ticker)} />
                 ))}
               </Pie>
-              <Tooltip formatter={(v: number) => `${v.toFixed(1)}%`} contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", color: "var(--fg)" }} />
+              <Tooltip formatter={(v: number) => `${v.toFixed(1)}%`} contentStyle={{ background: "var(--card-solid)", border: "1px solid var(--border)", borderRadius: 10, color: "var(--fg)" }} itemStyle={{ color: "var(--fg)" }} />
             </PieChart>
           </ResponsiveContainer>
         </div>

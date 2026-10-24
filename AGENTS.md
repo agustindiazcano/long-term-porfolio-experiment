@@ -39,6 +39,7 @@ Static front end (Next.js + TypeScript, `output: "export"`) that visualizes a bu
 ## Conventions
 
 - Dark theme by default with a light/dark toggle (`data-theme`); use CSS variables, not hard-coded colors.
+- Font is Roboto (via `next/font/google` in `app/layout.tsx`). The sticky nav (`components/Nav.tsx`) links to section ids on the page; keep them in sync when adding or renaming sections.
 - Keep SEO in place: metadata in `app/layout.tsx`, `app/sitemap.ts`, JSON-LD.
 - The footer must keep saying "© Agustín Díaz-Cano 2026" plus the last update (month and year) via `NEXT_PUBLIC_LAST_UPDATE`, defined in `next.config.ts`.
 - Keep static-export compatibility (no server APIs, no optimized `next/image`).
