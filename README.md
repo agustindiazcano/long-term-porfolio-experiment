@@ -61,9 +61,10 @@ The `.github/workflows/deploy.yml` workflow builds and publishes on every push t
 
 > Note: crawlers only read `robots.txt` at the domain root; on a project page (`user.github.io/repo/`) that root is not under your control. With a custom domain it works as is.
 
-## Disclaimer
+## Autor
 
-Personal, educational project. Not investment advice.
+Agustin Diaz-Cano
+MS Candidate, Systems Engineering
 
 ## License
 
