@@ -64,7 +64,7 @@ The `.github/workflows/deploy.yml` workflow builds and publishes on every push t
 ## Autor
 
 Agustin Diaz-Cano
-MS Candidate, Systems Engineering
+MS Candidate, Systems Engineering (UTN FRBA, Argentina)
 
 ## License
 
